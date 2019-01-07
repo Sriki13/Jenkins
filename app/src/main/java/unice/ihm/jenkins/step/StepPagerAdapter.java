@@ -5,30 +5,34 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import unice.ihm.jenkins.Recipe;
+
 public class StepPagerAdapter extends FragmentStatePagerAdapter {
 
-    public StepPagerAdapter(FragmentManager fm) {
+    private Recipe recipe;
+
+    public StepPagerAdapter(Recipe recipe, FragmentManager fm) {
         super(fm);
+        this.recipe = recipe;
     }
 
     @Override
     public Fragment getItem(int i) {
         Fragment fragment = new StepFragment();
         Bundle args = new Bundle();
-        // Our object is just an integer :-P
-        args.putInt(StepFragment.STEP_KEY, i + 1);
+        args.putSerializable(StepFragment.STEP_KEY, recipe.getSteps().get(i));
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public int getCount() {
-        return 100;
+        return recipe.getSteps().size();
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return "OBJECT " + (position + 1);
+        return "Etape " + (position + 1);
     }
 
 }

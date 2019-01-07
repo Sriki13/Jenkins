@@ -1,6 +1,8 @@
 package unice.ihm.jenkins.step;
 
-public class Step {
+import java.io.Serializable;
+
+public class Step implements Serializable {
 
     private String title;
     private String imgPath;
@@ -23,4 +25,5 @@ public class Step {
     public String getStepText() {
         return stepText;
     }
+
 }

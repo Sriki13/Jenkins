@@ -1,10 +1,11 @@
 package unice.ihm.jenkins;
 
+import java.io.Serializable;
 import java.util.List;
 
 import unice.ihm.jenkins.step.Step;
 
-public class Recipe {
+public class Recipe implements Serializable {
 
     private List<Step> steps;
 
