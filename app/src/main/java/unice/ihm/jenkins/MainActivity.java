@@ -11,10 +11,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.util.ArrayList;
-
-import unice.ihm.jenkins.step.Step;
-
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -33,9 +29,9 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        Fragment follow = new FollowFragment();
+        Fragment follow = new RecipeFragment();
         Bundle bundle = new Bundle();
-        bundle.putSerializable(FollowFragment.RECIPE_KEY, new Recipe(new ArrayList<Step>()));
+        bundle.putSerializable(RecipeFragment.RECIPE_KEY, MockRecipes.getPizzaRecipe());
         follow.setArguments(bundle);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content_wrapper, follow)

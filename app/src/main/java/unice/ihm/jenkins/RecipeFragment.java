@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import unice.ihm.jenkins.step.StepPagerAdapter;
 
-public class FollowFragment extends Fragment {
+public class RecipeFragment extends Fragment {
 
     public static final String RECIPE_KEY = "recipe";
 
@@ -22,6 +22,7 @@ public class FollowFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.follow_main, container, false);
         Recipe recipe = (Recipe) getArguments().get(RECIPE_KEY);
+        //Recipe recipe = MockRecipes.getPizzaRecipe();
         pagerAdapter = new StepPagerAdapter(recipe, getActivity().getSupportFragmentManager());
         pager = root.findViewById(R.id.step_pager);
         pager.setAdapter(pagerAdapter);
