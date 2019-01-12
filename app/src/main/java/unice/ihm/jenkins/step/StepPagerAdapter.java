@@ -21,6 +21,7 @@ public class StepPagerAdapter extends FragmentStatePagerAdapter {
         Fragment fragment = new StepFragment();
         Bundle args = new Bundle();
         args.putSerializable(StepFragment.STEP_KEY, recipe.getSteps().get(i));
+        args.putSerializable(StepFragment.INDEX_KEY, i);
         fragment.setArguments(args);
         return fragment;
     }
