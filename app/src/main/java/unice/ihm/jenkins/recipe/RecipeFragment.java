@@ -3,16 +3,14 @@ package unice.ihm.jenkins.recipe;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-
-import java.util.Objects;
 
 import unice.ihm.jenkins.R;
 import unice.ihm.jenkins.entities.Ingredient;
@@ -36,6 +34,21 @@ public class RecipeFragment extends Fragment {
         ListView listView = root.findViewById(R.id.ingredientList);
 
         listView.setAdapter(arrayAdapter);
+
+        FloatingActionButton next = root.findViewById(R.id.next_button);
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pager.arrowScroll(View.FOCUS_RIGHT);
+            }
+        });
+        FloatingActionButton previous = root.findViewById(R.id.previous_button);
+        previous.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pager.arrowScroll(View.FOCUS_LEFT);
+            }
+        });
         return root;
     }
 
