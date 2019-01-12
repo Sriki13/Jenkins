@@ -21,6 +21,10 @@ public class Recipe implements Serializable {
         this.time = time;
     }
 
+    public List<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
     public List<Step> getSteps() {
         return steps;
     }

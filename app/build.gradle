@@ -19,7 +19,7 @@ android {
 }
 
 dependencies {
-    implementation 'com.lsurvila.utils.animatedexpandablelistview:library:0.2'
+    implementation 'com.alespero:expandable-cardview:0.8'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:support-v4:27.1.1'

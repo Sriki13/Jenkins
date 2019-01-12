@@ -9,7 +9,7 @@
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="8dp"
         app:cardBackgroundColor="@color/cardview_light_background"
         app:cardCornerRadius="@dimen/activity_horizontal_margin"
@@ -39,6 +39,7 @@
                 android:id="@+id/step_picture"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:adjustViewBounds="true"
                 app:srcCompat="@android:drawable/screen_background_light_transparent" />
         </LinearLayout>
 

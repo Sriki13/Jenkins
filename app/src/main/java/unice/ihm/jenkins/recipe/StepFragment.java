@@ -7,13 +7,16 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.io.IOException;
 import java.io.InputStream;
 
 import unice.ihm.jenkins.R;
+import unice.ihm.jenkins.entities.Ingredient;
 import unice.ihm.jenkins.entities.Step;
 
 public class StepFragment extends Fragment {
@@ -42,6 +45,7 @@ public class StepFragment extends Fragment {
                 e.printStackTrace();
             }
         }
+
         return rootView;
     }
 
