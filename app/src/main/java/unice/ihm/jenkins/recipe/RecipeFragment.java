@@ -1,4 +1,4 @@
-package unice.ihm.jenkins;
+package unice.ihm.jenkins.recipe;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,7 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import unice.ihm.jenkins.step.StepPagerAdapter;
+import unice.ihm.jenkins.R;
+import unice.ihm.jenkins.entities.Recipe;
 
 public class RecipeFragment extends Fragment {
 

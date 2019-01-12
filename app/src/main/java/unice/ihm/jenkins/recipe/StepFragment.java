@@ -1,4 +1,4 @@
-package unice.ihm.jenkins.step;
+package unice.ihm.jenkins.recipe;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import unice.ihm.jenkins.R;
+import unice.ihm.jenkins.entities.Step;
 
 public class StepFragment extends Fragment {
 

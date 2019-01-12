@@ -1,8 +1,6 @@
-package unice.ihm.jenkins;
+package unice.ihm.jenkins.entities;
 
 import java.util.Arrays;
-
-import unice.ihm.jenkins.step.Step;
 
 /**
  * @author Guillaume André

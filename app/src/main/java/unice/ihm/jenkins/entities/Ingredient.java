@@ -1,4 +1,4 @@
-package unice.ihm.jenkins;
+package unice.ihm.jenkins.entities;
 
 public class Ingredient {
 

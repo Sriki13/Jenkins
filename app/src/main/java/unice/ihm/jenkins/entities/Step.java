@@ -1,4 +1,4 @@
-package unice.ihm.jenkins.step;
+package unice.ihm.jenkins.entities;
 
 import java.io.Serializable;
 

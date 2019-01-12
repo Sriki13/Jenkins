@@ -1,11 +1,9 @@
-package unice.ihm.jenkins;
+package unice.ihm.jenkins.entities;
 
 import android.support.annotation.Nullable;
 
 import java.io.Serializable;
 import java.util.List;
-
-import unice.ihm.jenkins.step.Step;
 
 public class Recipe implements Serializable {
 

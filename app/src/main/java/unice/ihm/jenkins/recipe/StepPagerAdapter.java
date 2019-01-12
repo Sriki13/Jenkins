@@ -1,11 +1,11 @@
-package unice.ihm.jenkins.step;
+package unice.ihm.jenkins.recipe;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import unice.ihm.jenkins.Recipe;
+import unice.ihm.jenkins.entities.Recipe;
 
 public class StepPagerAdapter extends FragmentStatePagerAdapter {
 
