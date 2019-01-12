@@ -18,17 +18,23 @@ public class StepPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int i) {
-        Fragment fragment = new StepFragment();
         Bundle args = new Bundle();
-        args.putSerializable(StepFragment.STEP_KEY, recipe.getSteps().get(i));
-        args.putSerializable(StepFragment.INDEX_KEY, i);
+        Fragment fragment;
+        if (i == recipe.getSteps().size()) {
+            fragment = new EndFragment();
+            args.putString(EndFragment.IMG_PATH_KEY, recipe.getImgPath());
+        } else {
+            fragment = new StepFragment();
+            args.putSerializable(StepFragment.STEP_KEY, recipe.getSteps().get(i));
+            args.putSerializable(StepFragment.INDEX_KEY, i);
+        }
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public int getCount() {
-        return recipe.getSteps().size();
+        return recipe.getSteps().size() + 1;
     }
 
     @Override

@@ -29,4 +29,8 @@ public class Recipe implements Serializable {
         return steps;
     }
 
+    public String getImgPath() {
+        return imgPath;
+    }
+
 }
