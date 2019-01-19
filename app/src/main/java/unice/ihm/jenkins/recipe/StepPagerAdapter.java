@@ -30,7 +30,7 @@ public class StepPagerAdapter extends FragmentStatePagerAdapter {
             args.putString(EndFragment.IMG_PATH_KEY, recipe.getImgPath());
         } else {
             fragment = new StepFragment();
-            args.putSerializable(StepFragment.STEP_KEY, recipe.getSteps().get(i));
+            args.putSerializable(StepFragment.STEP_KEY, recipe.getSteps().get(i - 1));
             args.putSerializable(StepFragment.INDEX_KEY, i);
         }
         fragment.setArguments(args);
