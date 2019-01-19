@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/step_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -25,14 +24,18 @@
                 android:id="@+id/step_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
                 android:ellipsize="none"
                 android:scrollHorizontally="false"
-                android:text="1. Example step title" />
+                android:text="1. Example step title"
+                android:textAppearance="@style/TextAppearance.AppCompat"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/step_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
                 android:text="Example step text" />
 
             <ImageView
