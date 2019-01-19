@@ -3,6 +3,7 @@ package unice.ihm.jenkins.recipe;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
+import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import java.util.List;
+import java.util.Locale;
 
 import unice.ihm.jenkins.R;
 import unice.ihm.jenkins.entities.Recipe;
@@ -24,8 +26,8 @@ public class RecipeFragment extends Fragment {
 
     public static final String RECIPE_KEY = "recipe";
 
-    private StepPagerAdapter pagerAdapter;
     private ViewPager pager;
+    private JenkinsTextAnalyzer textAnalyzer;
 
     private static final int SPEECH_REQUEST_CODE = 0;
 
@@ -34,7 +36,7 @@ public class RecipeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.follow_main, container, false);
         Recipe recipe = (Recipe) getArguments().get(RECIPE_KEY);
-        pagerAdapter = new StepPagerAdapter(recipe, getActivity().getSupportFragmentManager());
+        StepPagerAdapter pagerAdapter = new StepPagerAdapter(recipe, getActivity().getSupportFragmentManager());
         pager = root.findViewById(R.id.step_pager);
         pager.setAdapter(pagerAdapter);
         IngredientAdapter ingredientAdapter = new IngredientAdapter(this.getContext(), recipe.getIngredients());
@@ -64,6 +66,14 @@ public class RecipeFragment extends Fragment {
             }
         });
 
+        TextToSpeech tts = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+
+            }
+        });
+        tts.setLanguage(Locale.FRANCE);
+        textAnalyzer = new JenkinsTextAnalyzer(tts, recipe, pager);
         return root;
     }
 
@@ -76,13 +86,12 @@ public class RecipeFragment extends Fragment {
 
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode,
-                                 Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == SPEECH_REQUEST_CODE && resultCode == RESULT_OK) {
             List<String> results = data.getStringArrayListExtra(
                     RecognizerIntent.EXTRA_RESULTS);
             String spokenText = results.get(0);
-
+            textAnalyzer.answer(spokenText);
         }
         super.onActivityResult(requestCode, resultCode, data);
     }

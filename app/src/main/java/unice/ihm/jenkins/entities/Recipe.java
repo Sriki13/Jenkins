@@ -3,7 +3,9 @@ package unice.ihm.jenkins.entities;
 import android.support.annotation.Nullable;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Recipe implements Serializable {
 
@@ -52,5 +54,13 @@ public class Recipe implements Serializable {
 
     public int getNbPeople() {
         return nbPeople;
+    }
+
+    public Set<Keyword> getAllKeywords() {
+        Set<Keyword> result = new HashSet<>();
+        for (Step step : steps) {
+            result.addAll(step.getKeywords());
+        }
+        return result;
     }
 }

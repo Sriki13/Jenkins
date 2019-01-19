@@ -30,6 +30,14 @@ public class Ingredient {
         return unit;
     }
 
+    public String getDescription() {
+        return name + " " + getQuantityAsString();
+    }
+
+    public String getQuantityAsString() {
+        return quantity + " " + unit;
+    }
+
     @Override
     public String toString() {
         return "Ingredient{" +
