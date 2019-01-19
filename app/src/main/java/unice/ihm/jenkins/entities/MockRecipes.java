@@ -9,9 +9,9 @@ import java.util.Collections;
 public class MockRecipes {
 
     public static Recipe getPizzaRecipe() {
-        return new Recipe("Beaucoup de finesse pour cette pizza un peu spéciale où la pâte traditionnelle est remplacée par une pâte feuilletée.\n" +
+        return new Recipe("Pizza pate feuilletée", "Beaucoup de finesse pour cette pizza un peu spéciale où la pâte traditionnelle est remplacée par une pâte feuilletée.\n" +
                 "Mais hormis cette petite différence de pâte, les fondamentaux de la pizza sont là : sauce tomate, garniture variée et feuilles de basilic.",
-                "pizza/main.jpg", "36 min",
+                "pizza/main.jpg", "11 min de préparation, 25 min de cuisson", 4,
                 Arrays.asList(
                         new Ingredient("Jambon", 50, "g"),
                         new Ingredient("Huile d'olive", 1, "cuillière à soupe"),
