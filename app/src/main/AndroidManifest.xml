@@ -26,6 +26,7 @@
             android:name=".recipe.RecipeFragment"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package unice.ihm.jenkins;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ import unice.ihm.jenkins.recipe.RecipeFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, RecognitionListener {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,6 +125,7 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+
     //--------------------------------------------------------------------------------------
     // Implementation of the dead
     //--------------------------------------------------------------------------------------
@@ -155,6 +158,7 @@ public class MainActivity extends AppCompatActivity
         recognizer.addGrammarSearch(MENU_SEARCH, menuGrammar);
     }
 
+    @SuppressLint("StaticFieldLeak")
     private void runRecognizerSetup() {
         // Recognizer initialization is a time-consuming and it involves IO,
         // so we execute it in async task
