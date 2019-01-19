@@ -1,5 +1,6 @@
 package unice.ihm.jenkins;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content_wrapper, follow)
                 .commit();
+
     }
 
     @Override
