@@ -30,10 +30,10 @@ public class RecipeFragment extends Fragment {
         pagerAdapter = new StepPagerAdapter(recipe, getActivity().getSupportFragmentManager());
         pager = root.findViewById(R.id.step_pager);
         pager.setAdapter(pagerAdapter);
-        ArrayAdapter<Ingredient> arrayAdapter = new ArrayAdapter<>(this.getContext(), android.R.layout.simple_list_item_1, recipe.getIngredients());
+        IngredientAdapter ingredientAdapter = new IngredientAdapter(this.getContext(), recipe.getIngredients());
         ListView listView = root.findViewById(R.id.ingredientList);
 
-        listView.setAdapter(arrayAdapter);
+        listView.setAdapter(ingredientAdapter);
 
         FloatingActionButton next = root.findViewById(R.id.next_button);
         next.setOnClickListener(new View.OnClickListener() {
