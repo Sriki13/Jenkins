@@ -9,11 +9,9 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import unice.ihm.jenkins.R;
-import unice.ihm.jenkins.entities.Ingredient;
 import unice.ihm.jenkins.entities.Recipe;
 
 public class RecipeFragment extends Fragment {

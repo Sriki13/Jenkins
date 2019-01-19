@@ -7,18 +7,23 @@ import java.util.List;
 
 public class Recipe implements Serializable {
 
+    private String title;
     private String description;
     private String imgPath;
     private List<Step> steps;
     private List<Ingredient> ingredients;
     private String time;
+    private int nbPeople;
 
-    public Recipe(String description, @Nullable String imgPath, String time, List<Ingredient> ingredients, List<Step> steps) {
+    public Recipe(String title, String description, @Nullable String imgPath, String time,
+                  int nbPeople, List<Ingredient> ingredients, List<Step> steps) {
+        this.title = title;
         this.description = description;
         this.steps = steps;
         this.imgPath = imgPath;
         this.ingredients = ingredients;
         this.time = time;
+        this.nbPeople = nbPeople;
     }
 
     public List<Ingredient> getIngredients() {
@@ -33,4 +38,19 @@ public class Recipe implements Serializable {
         return imgPath;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public int getNbPeople() {
+        return nbPeople;
+    }
 }
