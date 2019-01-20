@@ -27,10 +27,11 @@ import edu.cmu.pocketsphinx.RecognitionListener;
 import edu.cmu.pocketsphinx.SpeechRecognizer;
 import edu.cmu.pocketsphinx.SpeechRecognizerSetup;
 import unice.ihm.jenkins.entities.MockRecipes;
+import unice.ihm.jenkins.entities.Recipe;
 import unice.ihm.jenkins.recipe.RecipeFragment;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, RecognitionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, RecognitionListener, RecipeListElementFragment.OnListFragmentInteractionListener {
 
 
     @Override
@@ -45,16 +46,6 @@ public class MainActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        Fragment follow = new RecipeFragment();
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(RecipeFragment.RECIPE_KEY, MockRecipes.getPizzaRecipe());
-        follow.setArguments(bundle);
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.content_wrapper, follow)
-                .commit();
 
         // Check if user has given permission to record audio
         int permissionCheck = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.RECORD_AUDIO);
@@ -281,5 +272,18 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onTimeout() {
         switchSearch(KWS_SEARCH);
+    }
+
+    @Override
+    public void onListFragmentInteraction(Recipe item) {
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+        Fragment follow = new RecipeFragment();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(RecipeFragment.RECIPE_KEY, MockRecipes.getPizzaRecipe());
+        follow.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.content_wrapper, follow)
+                .commit();
     }
 }
