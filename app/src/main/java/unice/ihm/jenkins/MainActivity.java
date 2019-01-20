@@ -53,6 +53,9 @@ public class MainActivity extends AppCompatActivity
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, PERMISSIONS_REQUEST_RECORD_AUDIO);
             return;
         }
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.content_wrapper, new RecipeListElementFragment())
+                .commit();
         // Recognizer initialization is a time-consuming and it involves IO,
         // so we execute it in async task
         runRecognizerSetup();
