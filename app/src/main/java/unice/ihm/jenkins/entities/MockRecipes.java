@@ -39,7 +39,6 @@ public class MockRecipes {
         );
     }
     
-    //new recipe added #1
     public static Recipe getPastaRecipe() {
         return new Recipe("One Pot Pasta", "Mais qu'est-ce que c'est ?\n" + 
                           "On savait déjà qu'il est possible de faire cuire des pâtes courtes par absorption. Avec les One Pot Pasta, on va plus loin car on met absolument tous les ingrédients dans une sauteuse, y compris les pâtes, on ajoute du bouillon et une dizaine de minutes après, c'est prêt et on n'a même pas besoin d'égoutter.\n" + 
@@ -57,8 +56,8 @@ public class MockRecipes {
                         new Ingredient("Parmesan râpé pour servir", 75, "g")
                 ),
                 Arrays.asList(
-                        new Step("", "pasta/01.jpg", "Ajoutez les pâtes et le reste des ingrédients dans la sauteuse.",),
-                        new Step("", "pasta/02.jpg", " Ajoutez le bouillon, le sel et allumez le feu sur feu moyen.",),
+                        new Step("", "pasta/01.jpg", "Ajoutez les pâtes et le reste des ingrédients dans la sauteuse."),
+                        new Step("", "pasta/02.jpg", " Ajoutez le bouillon, le sel et allumez le feu sur feu moyen."),
                         new Step("", "pasta/03.jpg", "Mélangez une fois ou deux durant la cuisson, le liquide doit bouillir."),
                         new Step("", "pasta/main.jpg", "C'est prêt !\n" + "La cuisson prend une dizaine de minutes. Mélangez et servez avec le parmesan détaillé en copeaux.")
                 )

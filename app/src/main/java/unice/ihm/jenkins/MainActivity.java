@@ -283,7 +283,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         Fragment follow = new RecipeFragment();
         Bundle bundle = new Bundle();
-        bundle.putSerializable(RecipeFragment.RECIPE_KEY, MockRecipes.getPizzaRecipe());
+        bundle.putSerializable(RecipeFragment.RECIPE_KEY, MockRecipes.getPastaRecipe());
         follow.setArguments(bundle);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content_wrapper, follow)
