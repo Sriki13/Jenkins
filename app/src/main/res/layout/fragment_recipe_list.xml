@@ -10,4 +10,6 @@
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
     tools:context=".RecipeListElementFragment"
-    tools:listitem="@layout/fragment_cardview_recipe" />
+    tools:listitem="@layout/fragment_cardview_recipe" >
+
+</android.support.v7.widget.RecyclerView>
