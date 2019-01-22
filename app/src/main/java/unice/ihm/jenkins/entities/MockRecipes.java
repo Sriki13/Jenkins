@@ -95,5 +95,29 @@ public class MockRecipes {
                 )
         );
     }
+    
+    //new recipe added #3
+    public static Recipe getPateRecipe() {
+        return new Recipe("Pâte à tartiner aux noisettes et au rhum", "Une pâte à tartiner maison originale et parfumée au rhum !",
+                "pate/main.jpg", "20 min de préparation, 10 min de cuisson", 8,
+                Arrays.asList(
+                        new Ingredient("Chocolat noir 70%", 170, "g"),
+                        new Ingredient("Lait concentré sucré", 250, "g"),
+                        new Ingredient("Pâte pralinée aux noisettes", 100, "g"),
+                        new Ingredient("Crème liquide", 10, "cl"),
+                        new Ingredient("Rhum ambré Negrita", 2, "cuillères à soupe")
+                ),
+                Arrays.asList(
+                        new Step("", "pate/01.jpg", "Versez le lait concentré sucré dans une casserole."),
+                        new Step("", "pate/02.jpg", "Cassez le chocolat noir en morceaux et versez-les dans la casserole avec le lait. Faites fondre le tout sur feu doux en mélangeant bien, puis retirez la casserole du feu."),
+                        new Step("", "pate/03.jpg", "Vous allez trouver que la pâte est assez épaisse : c’est normal. Ajoutez-y la pâte pralinée aux noisettes, mélangez."),
+                        new Step("", "pate/04.jpg", "Ajoutez la crème liquide, tout en continuant à mélanger."),
+                        new Step("", "pate/05.jpg", "Ajoutez le rhum, toujours en mélangeant."),
+                        new Step("", "pate/06.jpg", "Mélangez une dernière fois, jusqu’à obtenir une pâte à tartiner onctueuse."),
+                        new Step("", "pate/07.jpg", "Versez la pâte à tartiner obtenue dans 2 pots et gardez-la au frais avant et après dégustation."),
+                        new Step("", "pate/08.jpg", "Régalez-vous !")
+                )
+        );
+    }
 
 }
