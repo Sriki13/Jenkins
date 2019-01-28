@@ -67,7 +67,7 @@ public class MockRecipes {
     //new recipe added #2
     public static Recipe getGalettesRecipe() {
         return new Recipe("Galettes au quinoa et courgettes", "Des galettes légères et rapides à préparer, idéales en entrée ou comme plat végétarien.",
-                "pizza/main.jpg", "15 min de préparation, 20 min de cuisson", 4,
+                "galettes/main.jpg", "15 min de préparation, 20 min de cuisson", 4,
                 Arrays.asList(
                         new Ingredient("Quinoa", 125, "g"),
                         new Ingredient("Courgettes", 2, "pieces"),
@@ -81,18 +81,41 @@ public class MockRecipes {
                         new Ingredient("Sel", 1/2, "cuillères à café")
                 ),
                 Arrays.asList(
-                        new Step("", "pizza/01.jpg", "Faites dorer 50 g de jambon dans 1 cuillère à soupe d'huile d'olive sur feu vif. Réserver.",
-                                Collections.singletonList(new Keyword("Réserver", "Mettre de coté."))),
-                        new Step("", "pizza/02.jpg", " Préchauffez votre four à 240°C (460°F). Étalez 200 g de Pâte feuilletée sur une plaque allant au four, si vous avez un papier laissez le en dessous.\n" +
-                                "Piquez toute la surface de la pâte.",
-                                Collections.singletonList(new Keyword("Piquez", "Piquer le fond d'une tarte ou une pâte en général pour éviter qu'elle ne cloque à la cuisson. En général on fait ça avec une fourchette."))),
-                        new Step("", "pizza/03.jpg", "Étalez 120 g de Sauce tomate pour pizza sur toute la surface en laissant 0.5 cm au bord, et saupoudrez avec 1 cuillère à soupe d'herbes de Provence."),
-                        new Step("", "pizza/04.jpg", "Répartissez dessus le jambon, puis tout ce que vous voulez comme ingrédients."),
-                        new Step("", "pizza/05.jpg", "Ajoutez la mozzarella en petits cubes."),
-                        new Step("", "pizza/06.jpg", "Ajoutez du fromage de chèvre, des champignons, etc."),
-                        new Step("", "pizza/07.jpg", "Enfournez immédiatement dans un four bien chaud, et proche du bas du four plutôt qu'au milieu.\n" +
-                                "Dès que la pizza est cuite, sortez du four, arrosez d'un filet d'Huile d'olive aux herbes et répartissez quelques feuilles de basilic.\n" +
-                                "Servez immédiatement.")
+                        new Step("", "galettes/01.jpg", "Râpez les courgettes. Placez-les avec 1/2 cuillère à café de sel dans une passoire pour les dégorger. Laissez reposer 10 minutes puis essorez les courgettes.\n" + "En attendant, préparez le quinoa. Mélangez l'eau et le quinoa dans une petite casserole, portez à ébullition et laissez cuire pendant 10 minutes. Retirer du feu, égrainez le quinoa avec une fourchette et laissez reposer dix minutes."),
+                        new Step("", "galettes/02.jpg", "Versez le quinoa dans un saladier. Ajoutez les courgettes râpées."),
+                        new Step("", "galettes/03.jpg", "Ajoutez l'ail haché."),
+                        new Step("", "galettes/04.jpg", "Ajoutez l'oeuf."),
+                        new Step("", "galettes/05.jpg", "Ajoutez l'origan."),
+                        new Step("", "galettes/06.jpg", "Ajoutez la chapelure."),
+                        new Step("", "galettes/07.jpg", "Ajoutez le parmesan râpé."),
+                        new Step("", "galettes/08.jpg", "Assaisonnez avec du sel et du poivre, mélangez bien, puis formez des galettes."),
+                        new Step("", "galettes/09.jpg", "Faites chauffer l'huile dans une pôele, ajoutez les galettes et faites-les dorer 2 minutes."),
+                        new Step("", "galettes/10.jpg", "Retournez-les et faites-les dorer deux minutes de l'autre coté. Servez les galettes avec une sauce au yaourt."),
+                        new Step("", "galettes/11.jpg", "Régalez-vous !")
+                )
+        );
+    }
+    
+    //new recipe added #3
+    public static Recipe getPateRecipe() {
+        return new Recipe("Pâte à tartiner aux noisettes et au rhum", "Une pâte à tartiner maison originale et parfumée au rhum !",
+                "pate/main.jpg", "20 min de préparation, 10 min de cuisson", 8,
+                Arrays.asList(
+                        new Ingredient("Chocolat noir 70%", 170, "g"),
+                        new Ingredient("Lait concentré sucré", 250, "g"),
+                        new Ingredient("Pâte pralinée aux noisettes", 100, "g"),
+                        new Ingredient("Crème liquide", 10, "cl"),
+                        new Ingredient("Rhum ambré Negrita", 2, "cuillères à soupe")
+                ),
+                Arrays.asList(
+                        new Step("", "pate/01.jpg", "Versez le lait concentré sucré dans une casserole."),
+                        new Step("", "pate/02.jpg", "Cassez le chocolat noir en morceaux et versez-les dans la casserole avec le lait. Faites fondre le tout sur feu doux en mélangeant bien, puis retirez la casserole du feu."),
+                        new Step("", "pate/03.jpg", "Vous allez trouver que la pâte est assez épaisse : c’est normal. Ajoutez-y la pâte pralinée aux noisettes, mélangez."),
+                        new Step("", "pate/04.jpg", "Ajoutez la crème liquide, tout en continuant à mélanger."),
+                        new Step("", "pate/05.jpg", "Ajoutez le rhum, toujours en mélangeant."),
+                        new Step("", "pate/06.jpg", "Mélangez une dernière fois, jusqu’à obtenir une pâte à tartiner onctueuse."),
+                        new Step("", "pate/07.jpg", "Versez la pâte à tartiner obtenue dans 2 pots et gardez-la au frais avant et après dégustation."),
+                        new Step("", "pate/08.jpg", "Régalez-vous !")
                 )
         );
     }
