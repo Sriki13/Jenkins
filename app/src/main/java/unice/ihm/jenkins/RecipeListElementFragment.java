@@ -64,7 +64,6 @@ public class RecipeListElementFragment extends Fragment {
         recipeList.add(new Recipe("C", "C", "A", "A", 3,null, null));
         recipeList.add(new Recipe("D", "D", "A", "A", 3,null, null));
 
-
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();

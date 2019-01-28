@@ -5,6 +5,8 @@ import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
@@ -21,6 +23,10 @@ import android.view.MenuItem;
 import java.io.File;
 import java.io.IOException;
 
+import ai.kitt.snowboy.AppResCopy;
+import ai.kitt.snowboy.MsgEnum;
+import ai.kitt.snowboy.audio.AudioDataSaver;
+import ai.kitt.snowboy.audio.RecordingThread;
 import edu.cmu.pocketsphinx.Assets;
 import edu.cmu.pocketsphinx.Hypothesis;
 import edu.cmu.pocketsphinx.RecognitionListener;
@@ -59,6 +65,8 @@ public class MainActivity extends AppCompatActivity
         // Recognizer initialization is a time-consuming and it involves IO,
         // so we execute it in async task
         runRecognizerSetup();
+
+        initHotword();
 
     }
 
@@ -289,4 +297,37 @@ public class MainActivity extends AppCompatActivity
                 .replace(R.id.content_wrapper, follow)
                 .commit();
     }
+
+    private void initHotword() {
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this,
+                        Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED) {
+            AppResCopy.copyResFromAssetsToSD(this);
+
+            RecordingThread recordingThread = new RecordingThread(new Handler() {
+                @Override
+                public void handleMessage(Message msg) {
+                    MsgEnum message = MsgEnum.getMsgEnum(msg.what);
+                    switch (message) {
+                        case MSG_ACTIVE:
+                            System.out.println("Hotword detected");
+                            break;
+                        case MSG_INFO:
+                            break;
+                        case MSG_VAD_SPEECH:
+                            break;
+                        case MSG_VAD_NOSPEECH:
+                            break;
+                        case MSG_ERROR:
+                            break;
+                        default:
+                            super.handleMessage(msg);
+                            break;
+                    }
+                }
+            }, new AudioDataSaver());
+        }
+    }
+
 }
