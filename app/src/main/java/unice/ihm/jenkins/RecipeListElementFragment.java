@@ -66,7 +66,6 @@ public class RecipeListElementFragment extends Fragment {
         recipeList.add(MockRecipes.getRecipe("Galettes au quinoa et courgettes"));
         recipeList.add(MockRecipes.getRecipe("Pâte à tartiner aux noisettes et au rhum"));
 
-
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
