@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import unice.ihm.jenkins.entities.MockRecipes;
 import unice.ihm.jenkins.entities.Recipe;
 
 /**
@@ -26,6 +27,8 @@ public class RecipeListElementFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
+    /* Recipe list to be used in other classes*/
+    static public List recipeList = new ArrayList<Recipe>();
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -58,11 +61,10 @@ public class RecipeListElementFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_recipe_list, container, false);
 
-        List recipeList = new ArrayList<Recipe>();
-        recipeList.add(new Recipe("Pizza", "Pate feuilletée", "A", "A", 3,null, null));
-        recipeList.add(new Recipe("B", "B", "A", "A", 3,null, null));
-        recipeList.add(new Recipe("C", "C", "A", "A", 3,null, null));
-        recipeList.add(new Recipe("D", "D", "A", "A", 3,null, null));
+        recipeList.add(MockRecipes.getRecipe("Pizza pate feuilletée"));
+        recipeList.add(MockRecipes.getRecipe("One Pot Pasta"));
+        recipeList.add(MockRecipes.getRecipe("Galettes au quinoa et courgettes"));
+        recipeList.add(MockRecipes.getRecipe("Pâte à tartiner aux noisettes et au rhum"));
 
 
         // Set the adapter

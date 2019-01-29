@@ -9,6 +9,7 @@ import java.util.Set;
 
 public class Recipe implements Serializable {
 
+    private int nbCrt;
     private String title;
     private String description;
     private String imgPath;
@@ -17,8 +18,9 @@ public class Recipe implements Serializable {
     private String time;
     private int nbPeople;
 
-    public Recipe(String title, String description, @Nullable String imgPath, String time,
+    public Recipe(int nbCrt, String title, String description, @Nullable String imgPath, String time,
                   int nbPeople, List<Ingredient> ingredients, List<Step> steps) {
+        this.nbCrt = nbCrt;
         this.title = title;
         this.description = description;
         this.steps = steps;
@@ -28,6 +30,7 @@ public class Recipe implements Serializable {
         this.nbPeople = nbPeople;
     }
 
+    public int getNbCrt() { return nbCrt;}
     public List<Ingredient> getIngredients() {
         return ingredients;
     }

@@ -20,6 +20,7 @@ import android.view.MenuItem;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 
 import edu.cmu.pocketsphinx.Assets;
 import edu.cmu.pocketsphinx.Hypothesis;
@@ -283,7 +284,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         Fragment follow = new RecipeFragment();
         Bundle bundle = new Bundle();
-        bundle.putSerializable(RecipeFragment.RECIPE_KEY, MockRecipes.getPastaRecipe());
+        bundle.putSerializable(RecipeFragment.RECIPE_KEY, item);
         follow.setArguments(bundle);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content_wrapper, follow)
