@@ -2,11 +2,13 @@ package unice.ihm.jenkins;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
@@ -22,24 +24,24 @@ import android.view.MenuItem;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
 
-import ai.kitt.snowboy.AppResCopy;
-import ai.kitt.snowboy.MsgEnum;
-import ai.kitt.snowboy.audio.AudioDataSaver;
-import ai.kitt.snowboy.audio.RecordingThread;
+import ai.picovoice.porcupinemanager.KeywordCallback;
+import ai.picovoice.porcupinemanager.PorcupineManager;
+import ai.picovoice.porcupinemanager.PorcupineManagerException;
 import edu.cmu.pocketsphinx.Assets;
 import edu.cmu.pocketsphinx.Hypothesis;
 import edu.cmu.pocketsphinx.RecognitionListener;
 import edu.cmu.pocketsphinx.SpeechRecognizer;
 import edu.cmu.pocketsphinx.SpeechRecognizerSetup;
-import unice.ihm.jenkins.entities.MockRecipes;
 import unice.ihm.jenkins.entities.Recipe;
 import unice.ihm.jenkins.recipe.RecipeFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, RecognitionListener, RecipeListElementFragment.OnListFragmentInteractionListener {
 
+
+    public MainActivity() throws PorcupineManagerException {
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,10 +67,14 @@ public class MainActivity extends AppCompatActivity
                 .commit();
         // Recognizer initialization is a time-consuming and it involves IO,
         // so we execute it in async task
-        runRecognizerSetup();
 
-        initHotword();
-
+        try {
+            initHotword();
+        } catch (PorcupineManagerException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -299,36 +305,44 @@ public class MainActivity extends AppCompatActivity
                 .commit();
     }
 
-    private void initHotword() {
-        if (ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(this,
-                        Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED) {
-            AppResCopy.copyResFromAssetsToSD(this);
+    private void initHotword() throws PorcupineManagerException, IOException {
 
-            RecordingThread recordingThread = new RecordingThread(new Handler() {
+
+    String filename = "francesca";
+    // get the keyword file and model parameter file from internal storage.
+    String keywordFilePath = new File(this.getFilesDir(), filename + ".ppn")
+            .getAbsolutePath();
+    String modelFilePath = new File(this.getFilesDir(), "params.pv").getAbsolutePath();
+
+    PorcupineManager manager = new PorcupineManager(
+            modelFilePath,
+            keywordFilePath,
+            0.5f,
+            new KeywordCallback() {
                 @Override
-                public void handleMessage(Message msg) {
-                    MsgEnum message = MsgEnum.getMsgEnum(msg.what);
-                    switch (message) {
-                        case MSG_ACTIVE:
-                            System.out.println("Hotword detected");
-                            break;
-                        case MSG_INFO:
-                            break;
-                        case MSG_VAD_SPEECH:
-                            break;
-                        case MSG_VAD_NOSPEECH:
-                            break;
-                        case MSG_ERROR:
-                            break;
-                        default:
-                            super.handleMessage(msg);
-                            break;
-                    }
+                public void run(int keyword_index) {
+                    System.out.println("hello francesca");
+
                 }
-            }, new AudioDataSaver());
+            });
+
+    manager.start();
+}
+
+    private String getRealPathFromURI(Context context, Uri contentUri) {
+        Cursor cursor = null;
+        try {
+            String[] proj = { MediaStore.Images.Media.DATA };
+            cursor = context.getContentResolver().query(contentUri,  proj, null, null, null);
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            return cursor.getString(column_index);
+        } catch (Exception e) {
+            return "";
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
         }
     }
-
 }
