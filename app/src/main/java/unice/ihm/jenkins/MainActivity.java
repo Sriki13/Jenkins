@@ -4,11 +4,9 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.net.Uri;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
@@ -22,8 +20,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 import ai.picovoice.porcupinemanager.KeywordCallback;
 import ai.picovoice.porcupinemanager.PorcupineManager;
@@ -306,42 +308,61 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void initHotword() throws PorcupineManagerException, IOException {
+        String filename = "francesca";
+        copyPorcupineConfigFiles(getApplicationContext());
+        // get the keyword file and model parameter file from internal storage.
+        String keywordFilePath = new File(this.getFilesDir(), filename + ".ppn")
+                .getAbsolutePath();
+        String modelFilePath = new File(this.getFilesDir(), "params.pv").getAbsolutePath();
 
+        PorcupineManager manager = new PorcupineManager(
+                modelFilePath,
+                keywordFilePath,
+                0.5f,
+                new KeywordCallback() {
+                    @Override
+                    public void run(int keyword_index) {
+                        System.out.println("hello francesca");
 
-    String filename = "francesca";
-    // get the keyword file and model parameter file from internal storage.
-    String keywordFilePath = new File(this.getFilesDir(), filename + ".ppn")
-            .getAbsolutePath();
-    String modelFilePath = new File(this.getFilesDir(), "params.pv").getAbsolutePath();
+                    }
+                });
 
-    PorcupineManager manager = new PorcupineManager(
-            modelFilePath,
-            keywordFilePath,
-            0.5f,
-            new KeywordCallback() {
-                @Override
-                public void run(int keyword_index) {
-                    System.out.println("hello francesca");
+        manager.start();
+    }
 
+    private static void copyPorcupineConfigFiles(Context context) {
+        int[] resIds = {
+                R.raw.francesca, R.raw.params
+        };
+        Resources resources = context.getResources();
+        for (int resId : resIds) {
+            String filename = resources.getResourceEntryName(resId);
+            String fileExtension = resId == R.raw.params ? ".pv" : ".ppn";
+            InputStream is = null;
+            OutputStream os = null;
+            try {
+                is = new BufferedInputStream(resources.openRawResource(resId),
+                        256);
+                os = new BufferedOutputStream(context.openFileOutput(filename + fileExtension,
+                        Context.MODE_PRIVATE), 256);
+                int r;
+                while ((r = is.read()) != -1) {
+                    os.write(r);
                 }
-            });
-
-    manager.start();
-}
-
-    private String getRealPathFromURI(Context context, Uri contentUri) {
-        Cursor cursor = null;
-        try {
-            String[] proj = { MediaStore.Images.Media.DATA };
-            cursor = context.getContentResolver().query(contentUri,  proj, null, null, null);
-            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-            cursor.moveToFirst();
-            return cursor.getString(column_index);
-        } catch (Exception e) {
-            return "";
-        } finally {
-            if (cursor != null) {
-                cursor.close();
+                os.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (is != null) {
+                        is.close();
+                    }
+                    if (os != null) {
+                        os.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
