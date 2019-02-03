@@ -64,6 +64,11 @@ public class MainActivity extends AppCompatActivity
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, PERMISSIONS_REQUEST_RECORD_AUDIO);
             return;
         }
+        int permissionCheckInternet = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.INTERNET);
+        if (permissionCheckInternet != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.INTERNET}, PERMISSIONS_REQUEST_RECORD_AUDIO);
+            return;
+        }
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content_wrapper, new RecipeListElementFragment())
                 .commit();

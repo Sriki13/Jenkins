@@ -61,6 +61,7 @@ public class RecipeListElementFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_recipe_list, container, false);
 
+        recipeList.add(MockRecipes.getRecipe("Smoothie Kiwi-Pomme-Banane"));
         recipeList.add(MockRecipes.getRecipe("Pizza pate feuilletée"));
         recipeList.add(MockRecipes.getRecipe("One Pot Pasta"));
         recipeList.add(MockRecipes.getRecipe("Galettes au quinoa et courgettes"));

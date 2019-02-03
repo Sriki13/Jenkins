@@ -95,6 +95,30 @@ public class MockRecipes {
                     )
             );
         }
+        else if(recipes.equals("Smoothie Kiwi-Pomme-Banane")) {
+            return new Recipe(2,"Smoothie Kiwi-Pomme-Banane", "Un smoothie frais et coloré pour commencer la journée sur le bon pied.",
+                    "smoothie/main.jpg", "15 min de préparation", 2,
+                    Arrays.asList(
+                            new Ingredient("Kiwi", 2, "pièces"),
+                            new Ingredient("Pomme", 1, "pièce"),
+                            new Ingredient("Banane", 2, "pièces"),
+                            new Ingredient("Glace vanille", 2, "cuillère à soupe"),
+                            new Ingredient("Glaçon", 3, "pièces")
+                    ),
+                    Arrays.asList(
+                            new Step("Préparer les kiwis", "smoothie/01.jpg", "Maintenez fermement le fruit avec votre main non dominante. Placez la lame du couteau ou de l’éplucheur sur le haut du fruit. \n" +
+                                    "Utilisez votre main dominante pour tenir le couteau. Appuyez doucement l’ustensile jusqu’à ce que vous sentiez la peau céder sous la lame. Épluchez ensuite du haut vers le bas, en mouvement de sciage. \n" +
+                                    "Couper en petits morceaux et réserver dans un récipient."),
+                            new Step("Préparer la pomme", "smoothie/02.jpg", "Eplucher la pomme. La découper en quartier, et retirer le trognon de chaque quartier. Puis découper chaque quartier en petit morceau.\n" +
+                                    "Couper en petits morceaux et réserver dans un récipient."),
+                            new Step("Préparer les bananes", "smoothie/03.jpg", "Attraper la banane par la tige et la tirer vers le bas, retirer toute la peau de la banane.\n" +
+                                    "Puis découper la banane en rondelles. Couper en petits morceaux et réserver dans un récipient."),
+                            new Step("Fin de préparation", "smoothie/04.jpg", "Ajouter trois cuillières à soupe de glace à la vanille dans le récipient, ainsi que des glaçons si vous en avez. "),
+                            new Step("Mixer", "smoothie/05.jpg", "Mixer le tout jusqu'à obtention d'un smoothie onctueux et crémeux.\n"),
+                            new Step("A table !", "smoothie/06.jpg", "Verser dans des verres. A consommer frais. ")
+                    )
+            );
+        }
         else {
             return new Recipe(3,"Pâte à tartiner aux noisettes et au rhum", "Une pâte à tartiner maison originale et parfumée au rhum !",
                     "pate/main.jpg", "20 min de préparation, 10 min de cuisson", 8,
