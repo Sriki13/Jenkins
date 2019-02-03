@@ -35,7 +35,7 @@ public class JenkinsTextAnalyzer {
             String rest = spokenText.split("explique")[1];
             boolean found = false;
             for (Keyword keyword : recipe.getAllKeywords()) {
-                if (rest.contains(keyword.getWord())) {
+                if (keyword.matches(rest)) {
                     speak(keyword.getWord() + " signifie " + keyword.getExplanation());
                     found = true;
                     break;
