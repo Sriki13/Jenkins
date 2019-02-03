@@ -1,6 +1,7 @@
 package unice.ihm.jenkins.recipe;
 
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,11 +9,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import java.io.IOException;
 import java.io.InputStream;
 
+import unice.ihm.jenkins.MainActivity;
 import unice.ihm.jenkins.R;
 
 public class EndFragment extends Fragment {
@@ -38,6 +41,14 @@ public class EndFragment extends Fragment {
                 e.printStackTrace();
             }
         }
+        Button button = rootView.findViewById(R.id.last_step_back);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), MainActivity.class);
+                v.getContext().startActivity(intent);
+            }
+        });
         return rootView;
     }
 }
