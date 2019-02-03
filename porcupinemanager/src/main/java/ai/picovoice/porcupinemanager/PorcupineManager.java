@@ -150,12 +150,10 @@ public class PorcupineManager {
     }
 
     public void pause() throws InterruptedException {
-        System.out.println("\n*\n*\n*PAAAAAAAAAAAAAAAAAAAUUUUUUUUUUUUSE\n*\n*\n*");
         audioRecorder.setmStop(true);
     }
 
     public void resume() throws PorcupineManagerException {
-        System.out.println("\n*\n*\n*RESUUUUUUUUMEEEEEEEEEE\n*\n*\n*");
         audioRecorder = new AudioRecorder(audioConsumer);
         audioRecorder.start();
     }

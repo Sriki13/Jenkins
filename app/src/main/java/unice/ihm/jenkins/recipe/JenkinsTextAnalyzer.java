@@ -55,10 +55,10 @@ public class JenkinsTextAnalyzer {
             }
             speak(text.toString());
         } else if (spokenText.contains("combien")) {
-            String rest = spokenText.split("combien")[1];
+            String rest = spokenText.split("combien")[1].toLowerCase();
             boolean found = false;
             for (Ingredient ingredient : recipe.getIngredients()) {
-                if (rest.contains(ingredient.getName())) {
+                if (rest.contains(ingredient.getName().toLowerCase())) {
                     speak(ingredient.getQuantityAsString());
                     found = true;
                     break;

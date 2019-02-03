@@ -1,7 +1,9 @@
 package unice.ihm.jenkins.entities;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * @author Guillaume André
@@ -96,6 +98,8 @@ public class MockRecipes {
             );
         }
         else if(recipes.equals("Smoothie Kiwi-Pomme-Banane")) {
+            List<String> sciageAlt = new ArrayList<>();
+            sciageAlt.add("sillage");
             return new Recipe(2,"Smoothie Kiwi-Pomme-Banane", "Un smoothie frais et coloré pour commencer la journée sur le bon pied.",
                     "smoothie/main.jpg", "15 min de préparation", 2,
                     Arrays.asList(
@@ -109,7 +113,7 @@ public class MockRecipes {
                             new Step("Préparer les kiwis", "smoothie/01.jpg", "Maintenez fermement le fruit avec votre main non dominante. Placez la lame du couteau ou de l’éplucheur sur le haut du fruit. \n" +
                                     "Utilisez votre main dominante pour tenir le couteau. Appuyez doucement l’ustensile jusqu’à ce que vous sentiez la peau céder sous la lame. Épluchez ensuite du haut vers le bas, en mouvement de sciage. \n" +
                                     "Couper en petits morceaux et réserver dans un récipient.",
-                                    Collections.singletonList(new Keyword("Sciage", "Action de scier. Consiste à déplacer lentement le couteau dans le sens tranchant."))),
+                                    Collections.singletonList(new Keyword("sciage", sciageAlt,"Action de scier. Consiste à déplacer lentement le couteau dans le sens tranchant."))),
                             new Step("Préparer la pomme", "smoothie/02.jpg", "Eplucher la pomme. La découper en quartier, et retirer le trognon de chaque quartier. Puis découper chaque quartier en petit morceau.\n" +
                                     "Couper en petits morceaux et réserver dans un récipient."),
                             new Step("Préparer les bananes", "smoothie/03.jpg", "Attraper la banane par la tige et la tirer vers le bas, retirer toute la peau de la banane.\n" +
