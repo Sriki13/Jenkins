@@ -70,13 +70,13 @@ public class MainActivity extends AppCompatActivity
         // Recognizer initialization is a time-consuming and it involves IO,
         // so we execute it in async task
 
-        try {
-            initHotword();
-        } catch (PorcupineManagerException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            initHotword();
+//        } catch (PorcupineManagerException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     @Override

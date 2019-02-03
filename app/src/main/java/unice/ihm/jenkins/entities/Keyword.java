@@ -1,6 +1,8 @@
 package unice.ihm.jenkins.entities;
 
-public class Keyword {
+import java.io.Serializable;
+
+public class Keyword implements Serializable {
 
     private String word;
     private String explanation;

@@ -1,8 +1,9 @@
 package unice.ihm.jenkins.entities;
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 
-public class Ingredient {
+public class Ingredient implements Serializable {
 
     private String name;
     private double quantity;

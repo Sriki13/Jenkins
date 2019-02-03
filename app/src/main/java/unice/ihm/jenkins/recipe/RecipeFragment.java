@@ -1,6 +1,8 @@
 package unice.ihm.jenkins.recipe;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
@@ -14,9 +16,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 import java.util.Locale;
 
+import ai.picovoice.porcupinemanager.KeywordCallback;
+import ai.picovoice.porcupinemanager.PorcupineManager;
+import ai.picovoice.porcupinemanager.PorcupineManagerException;
 import unice.ihm.jenkins.R;
 import unice.ihm.jenkins.entities.Recipe;
 
@@ -74,6 +85,16 @@ public class RecipeFragment extends Fragment {
         });
         tts.setLanguage(Locale.FRANCE);
         textAnalyzer = new JenkinsTextAnalyzer(tts, recipe, pager);
+
+
+        try {
+            initHotword();
+        } catch (PorcupineManagerException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         return root;
     }
 
@@ -94,6 +115,66 @@ public class RecipeFragment extends Fragment {
             textAnalyzer.answer(spokenText);
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void initHotword() throws PorcupineManagerException, IOException {
+        String filename = "francesca";
+        copyPorcupineConfigFiles(getActivity().getApplicationContext());
+        // get the keyword file and model parameter file from internal storage.
+        String keywordFilePath = new File(getActivity().getFilesDir(), filename + ".ppn")
+                .getAbsolutePath();
+        String modelFilePath = new File(getActivity().getFilesDir(), "params.pv").getAbsolutePath();
+
+        PorcupineManager manager = new PorcupineManager(
+                modelFilePath,
+                keywordFilePath,
+                0.5f,
+                new KeywordCallback() {
+                    @Override
+                    public void run(int keyword_index) {
+                      displaySpeechRecognizer();
+
+                    }
+                });
+
+        manager.start();
+    }
+
+    private static void copyPorcupineConfigFiles(Context context) {
+        int[] resIds = {
+                R.raw.francesca, R.raw.params
+        };
+        Resources resources = context.getResources();
+        for (int resId : resIds) {
+            String filename = resources.getResourceEntryName(resId);
+            String fileExtension = resId == R.raw.params ? ".pv" : ".ppn";
+            InputStream is = null;
+            OutputStream os = null;
+            try {
+                is = new BufferedInputStream(resources.openRawResource(resId),
+                        256);
+                os = new BufferedOutputStream(context.openFileOutput(filename + fileExtension,
+                        Context.MODE_PRIVATE), 256);
+                int r;
+                while ((r = is.read()) != -1) {
+                    os.write(r);
+                }
+                os.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (is != null) {
+                        is.close();
+                    }
+                    if (os != null) {
+                        os.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
 
