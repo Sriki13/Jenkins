@@ -42,6 +42,9 @@ public class RecipeFragment extends Fragment {
 
     private static final int SPEECH_REQUEST_CODE = 0;
 
+    private PorcupineManager manager;
+
+    private Boolean isReadyToListen = false;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -99,6 +102,11 @@ public class RecipeFragment extends Fragment {
     }
 
     private void displaySpeechRecognizer() {
+        try {
+            manager.pause();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                 RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
@@ -113,8 +121,17 @@ public class RecipeFragment extends Fragment {
                     RecognizerIntent.EXTRA_RESULTS);
             String spokenText = results.get(0);
             textAnalyzer.answer(spokenText);
+            isReadyToListen = true;
         }
         super.onActivityResult(requestCode, resultCode, data);
+        try {
+            if(isReadyToListen){
+                manager.resume();
+                isReadyToListen = false;
+            }
+        } catch (PorcupineManagerException e) {
+            e.printStackTrace();
+        }
     }
 
     private void initHotword() throws PorcupineManagerException, IOException {
@@ -125,15 +142,14 @@ public class RecipeFragment extends Fragment {
                 .getAbsolutePath();
         String modelFilePath = new File(getActivity().getFilesDir(), "params.pv").getAbsolutePath();
 
-        PorcupineManager manager = new PorcupineManager(
+        this.manager = new PorcupineManager(
                 modelFilePath,
                 keywordFilePath,
                 0.5f,
                 new KeywordCallback() {
                     @Override
                     public void run(int keyword_index) {
-                      displaySpeechRecognizer();
-
+                        displaySpeechRecognizer();
                     }
                 });
 

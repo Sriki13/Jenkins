@@ -44,6 +44,8 @@ class AudioRecorder {
     private AtomicBoolean stop = new AtomicBoolean(false);
     private AtomicBoolean stopped = new AtomicBoolean(false);
 
+    private Boolean mStop = false;
+
     /**
      * A task to record audio and send the audio samples to Porcupine library for processing.
      */
@@ -96,6 +98,7 @@ class AudioRecorder {
             return;
         }
         stop.set(true);
+        mStop = true;
         while (!stopped.get()) {
             Thread.sleep(10);
         }
@@ -120,7 +123,7 @@ class AudioRecorder {
                     AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT, bufferSize);
             record.startRecording();
 
-            while (!stop.get()) {
+            while (!stop.get() && !mStop) {
                 int r = record.read(buffer, 0, buffer.length);
                 //if there are enough audio samples pass it to the consumer.
                 if (r == buffer.length) {
@@ -139,5 +142,13 @@ class AudioRecorder {
             }
             stopped.set(true);
         }
+    }
+
+    public Boolean getmStop() {
+        return mStop;
+    }
+
+    public void setmStop(Boolean mStop) {
+        this.mStop = mStop;
     }
 }

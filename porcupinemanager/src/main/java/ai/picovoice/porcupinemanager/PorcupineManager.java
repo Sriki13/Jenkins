@@ -26,8 +26,9 @@ import ai.picovoice.porcupine.PorcupineException;
  * and notifies the client when the keyword is spotted.
  */
 public class PorcupineManager {
-    private final AudioRecorder audioRecorder;
+    private AudioRecorder audioRecorder;
     private final Porcupine porcupine;
+    private final AudioConsumer audioConsumer;
 
     /**
      * PorcupineAudioConsumer process the raw PCM data returned by {@link AudioRecorder} and
@@ -96,7 +97,7 @@ public class PorcupineManager {
         } catch (PorcupineException e) {
             throw new PorcupineManagerException(e);
         }
-        AudioConsumer audioConsumer = new PorcupineAudioConsumer(keywordCallback);
+        audioConsumer = new PorcupineAudioConsumer(keywordCallback);
         audioRecorder = new AudioRecorder(audioConsumer);
     }
 
@@ -119,7 +120,7 @@ public class PorcupineManager {
             throw new PorcupineManagerException(e);
         }
 
-        AudioConsumer audioConsumer = new PorcupineAudioConsumer(keywordCallback);
+        audioConsumer = new PorcupineAudioConsumer(keywordCallback);
         audioRecorder = new AudioRecorder(audioConsumer);
     }
 
@@ -146,5 +147,16 @@ public class PorcupineManager {
         } finally {
             porcupine.delete();
         }
+    }
+
+    public void pause() throws InterruptedException {
+        System.out.println("\n*\n*\n*PAAAAAAAAAAAAAAAAAAAUUUUUUUUUUUUSE\n*\n*\n*");
+        audioRecorder.setmStop(true);
+    }
+
+    public void resume() throws PorcupineManagerException {
+        System.out.println("\n*\n*\n*RESUUUUUUUUMEEEEEEEEEE\n*\n*\n*");
+        audioRecorder = new AudioRecorder(audioConsumer);
+        audioRecorder.start();
     }
 }
