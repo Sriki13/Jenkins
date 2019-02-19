@@ -36,7 +36,7 @@ public class Ingredient implements Serializable {
     }
 
     public String getQuantityAsString() {
-        return quantity + " " + unit;
+        return (int)quantity + " " + unit;
     }
 
     @Override

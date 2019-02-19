@@ -31,9 +31,10 @@ public class JenkinsTextAnalyzer {
         LOGGER.info("heard text: " + spokenText);
         if (spokenText.contains("suivant")) {
             pager.arrowScroll(View.FOCUS_RIGHT);
+            //speak(pager.findViewById(R.id.step_text));
         } else if (spokenText.contains("précédent")) {
             pager.arrowScroll(View.FOCUS_LEFT);
-        } else if (spokenText.contains("répète l'étape")) {
+        } else if (spokenText.contains("répète") || spokenText.contains("lie") || spokenText.contains("lit") || spokenText.contains("lecture")) {
             speak(recipe.getSteps().get(pager.getCurrentItem() - 1).getStepText());
         } else if (spokenText.contains("explique")) {
             String rest = spokenText.split("explique")[1];
